@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#111827">
+<title>AfiliAI</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;padding:22px;background:#101827;color:white;font-family:Arial,sans-serif}
+h1{color:#fb923c;text-align:center}
+.card{background:#1e293b;padding:20px;border-radius:16px;margin-top:20px}
+input,select,textarea,button{width:100%;padding:14px;margin:8px 0;border:0;border-radius:9px;font-size:16px}
+button{background:#f97316;color:white;font-weight:bold}
+textarea{min-height:150px}
+.small{color:#cbd5e1;font-size:13px}
+</style>
+</head>
+<body>
+<h1>🚀 AfiliAI</h1>
+<p style="text-align:center">Seu assistente de divulgação de afiliados</p>
+<div class="card">
+<h3>📦 Cadastrar produto</h3>
+<input id="produto" placeholder="Nome do produto">
+<input id="preco" placeholder="Preço (ex.: R$ 49,90)">
+<input id="link" placeholder="Seu link de afiliado">
+<select id="rede">
+<option>Shopee</option>
+<option>Outra plataforma</option>
+</select>
+<button onclick="gerar()">✨ Gerar anúncio com IA</button>
+</div>
+<div class="card">
+<h3>📢 Seu anúncio</h3>
+<textarea id="anuncio" placeholder="Seu anúncio aparecerá aqui..." readonly></textarea>
+<button onclick="copiar()">📋 Copiar anúncio</button>
+<button onclick="compartilhar()">📲 Compartilhar</button>
+</div>
+<p class="small">AfiliAI — divulgue seus produtos e acompanhe seus links.</p>
+<script>
+function gerar(){
+let p=document.getElementById('produto').value;
+let v=document.getElementById('preco').value;
+let l=document.getElementById('link').value;
+let r=document.getElementById('rede').value;
+if(!p||!l){alert('Preencha o produto e o link!');return}
+document.getElementById('anuncio').value=
+'🔥 OLHA ESSA OFERTA! 🔥\n\n'+p+'\n💰 Preço: '+(v||'Confira no link')+
+'\n\n🛒 Confira aqui: '+l+
+'\n\n✨ Aproveite antes que acabe!\n\n#ofertas #promoção #'+r;
+}
+function copiar(){
+let a=document.getElementById('anuncio');
+if(!a.value){alert('Gere um anúncio primeiro');return}
+a.select();document.execCommand('copy');alert('Anúncio copiado!');
+}
+function compartilhar(){
+let t=document.getElementById('anuncio').value;
+if(!t){alert('Gere um anúncio primeiro');return}
+if(navigator.share){navigator.share({text:t})}
+else{copiar()}
+}
+</script>
+</body>
+</html>
